@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WebOfTrustClass</class>
+ <widget class="QMainWindow" name="WebOfTrustClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>WebOfTrust</string>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>600</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu_Certificati">
+    <property name="title">
+     <string>&amp;Certificati</string>
+    </property>
+    <addaction name="action_Emetti"/>
+    <addaction name="actionImpo_rta"/>
+    <addaction name="actionE_sporta"/>
+   </widget>
+   <widget class="QMenu" name="menu_Fiducia">
+    <property name="title">
+     <string>&amp;Fiducia</string>
+    </property>
+    <addaction name="action_Calcola_Fiducia"/>
+   </widget>
+   <addaction name="menu_Certificati"/>
+   <addaction name="menu_Fiducia"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_Imposta_Fiducia">
+   <property name="text">
+    <string>&amp;Imposta Fiducia</string>
+   </property>
+  </action>
+  <action name="action_Calcola_Fiducia">
+   <property name="text">
+    <string>&amp;Calcola Fiducia</string>
+   </property>
+  </action>
+  <action name="action_Emetti">
+   <property name="text">
+    <string>&amp;Emetti</string>
+   </property>
+  </action>
+  <action name="actionImpo_rta">
+   <property name="text">
+    <string>&amp;Importa</string>
+   </property>
+  </action>
+  <action name="actionE_sporta">
+   <property name="text">
+    <string>E&amp;sporta</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="weboftrust.qrc"/>
+ </resources>
+ <connections/>
+</ui>
