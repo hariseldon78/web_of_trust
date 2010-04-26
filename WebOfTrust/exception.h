@@ -1,13 +1,9 @@
 #ifndef EXCEPTION_H
 #define EXCEPTION_H
 
-#include <exception>
+#include <QtCore>
 
-class Exception: public std::exception 
-{
-public:
-	void printStackTrace();
-};
+using QtConcurrent::Exception;
 
 class RelationNotExistingException: public Exception {};
 class SelfRelationCalledException: public Exception {};

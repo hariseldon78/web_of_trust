@@ -7,5 +7,5 @@ Relation::Relation(Node* _from, Node* _to, double d): from(_from), to(_to), weig
 
 QString Relation::toString()
 {
-    return "["+from.name+"->"+to.name+"]";
+    return QString("[") + from->name + "->" + to->name + "]";
 }

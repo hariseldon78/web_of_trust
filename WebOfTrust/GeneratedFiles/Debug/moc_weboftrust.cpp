@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'weboftrust.h'
 **
-** Created: Tue 20. Apr 01:23:13 2010
+** Created: Tue 27. Apr 00:52:14 2010
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.3)
 **
 ** WARNING! All changes made in this file will be lost!

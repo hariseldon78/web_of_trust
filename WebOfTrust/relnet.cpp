@@ -1,195 +1,202 @@
 #include "relnet.h"
 #include "node.h"
 #include "relation.h"
+#include "net.h"
+#include <math.h>
+#include <QDebug>
+#include <windows.h>
 
-Relnet::Relnet()
+QString logStatus, logSim;
+
+Relnet::Relnet(): indentationLevel(0)
 {
-	indentationLevel = 0;
-	traversedNodes = new vector<Node*>();
-	traversedRelations = new vector<Relation*>();
+
+}
+
+Relnet::Relnet(QString _name): name(_name)
+{
+	net = new Net(_name);
 }
 
 Relnet::~Relnet()
 {
 }
 
-Net Relnet::getNet()
+Net* Relnet::getNet()
 {
 	return net;
 }
 
-Relnet::Relnet(QString name)
-{
-	this.name = name;
-	net = new Net(name);
-}
-
 NodeStatus Relnet::getStatus(Node* from, Node* destination)
 {
-	indent(log_status, "status(" + from + " -> " + destination + ")=");
-	if (from.equals(destination))
+	indent(logStatus, QString("status(") + from->toString() + " -> " + destination->toString() + ")=");
+	if (from == destination)
 	{
-		indent(log_status, "SELF");
-		return NodeStatus.SELF;
+		indent(logStatus, "SELF");
+		return SELF;
 	}
 
-	boolean hasTerminale = false;
-	boolean hasPaths = false;
-	Enumeration<Relation> i = from.outRelations.elements();
-	System.out.print(".");
-	while (i.hasMoreElements())
+	bool hasTerminale = false;
+	bool hasPaths = false;
+	QVectorIterator<Relation*> i(from->outRelations);
+	qDebug() << ".";
+	while (i.hasNext())
 	{
-		Relation relation = i.nextElement();
+		Relation* relation = i.next();
 
-		if (relation.to == destination)
+		if (relation->to == destination)
 			hasTerminale = true;
-		else if (!relation.to.flag)
+		else if (!relation->to->flag)
 			hasPaths = true;
 	}
 	if (hasTerminale)
 	{
 		if (hasPaths)
 		{
-			indent(log_status, "TERMINAL_PATHS");
-			return NodeStatus.TERMINAL_PATHS;
+			indent(logStatus, "TERMINAL_PATHS");
+			return TERMINAL_PATHS;
 		}
 		else
 		{
-			indent(log_status, "TERMINAL");
-			return NodeStatus.TERMINAL;
+			indent(logStatus, "TERMINAL");
+			return TERMINAL;
 		}
 	}
 	else if (hasPaths)
 	{
-		indent(log_status, "PATHS");
-		return NodeStatus.PATHS;
+		indent(logStatus, "PATHS");
+		return PATHS;
 	}
 	else
 	{
-		indent(log_status, "NO_PATH");
-		return NodeStatus.NO_PATH;
+		indent(logStatus, "NO_PATH");
+		return NO_PATH;
 	}
 }
 
 NodeStatus Relnet::getStatus(QString path)
 {
-	Node* from = net.getNode("" + path.charAt(0));
-	Node* destination = net.getNode("" + path.charAt(1));
+	Node* from = net->getNode(path.at(0));
+	Node* destination = net->getNode(path.at(1));
 
 	return getStatus(from, destination);
 
 }
 
-private double Relnet::trustRic(Node* from, Node* destination)
+double Relnet::trustRic(Node* from, Node* destination)
 {
 	QString result = "";
-	from.flag = true;
-	indent(log_sim, "{");
+	double retVal;
+	from->flag = true;
+	indent(logSim, "{");
 	indentationLevel++;
-	try
+	switch (getStatus(from, destination))
 	{
-		switch (getStatus(from, destination))
+	case NO_PATH:
+		indent(logSim, from->toString() + " -> " + destination->toString() + "(0) + ");
+		result = "(0)";
+		retVal = 0;
+		break;
+	case SELF:
+		throw new SelfRelationCalledException();
+		// result="(1)";
+		// return 1;
+	case TERMINAL:
 		{
-		case NO_PATH:
-			indent(log_sim, from + " -> " + destination + "(0) + ");
-			result = "(0)";
-			return 0;
-		case SELF:
-			throw new SelfRelationCalledException();
-			// result="(1)";
-			// return 1;
-		case TERMINAL:
+			traversedNodes.append(from);
+			Relation* r = from->getRelation(destination);
+			double w = r->weight;
+			traversedRelations.append(r);
+			indent(logSim, from->toString() + " -> " + destination->toString() + "(" + QString::number(w) + ") + ");
+			result = QString("(") + QString::number(w) + ")";
+			retVal = w;
+			break;
+		}
+	case PATHS:
+	case TERMINAL_PATHS:
+		if (from == destination)
+		{
+			retVal = 1.0;
+			break;
+		}
+		double ret = 0.0;
+		double weightSum = 0.0;
+		QVectorIterator<Relation*> i(from->outRelations);
+		double maxTrust=0;
+		while (i.hasNext())
+		{
+			Relation* r = i.next();
+			if (r->to->flag)
+				continue;
+			indent(logSim, QString() + "" + r->toString() + "(" + QString::number(r->weight) + ")*rel(" + r->to->toString() + " -> " + destination->toString() + ") ");
+			maxTrust = max(maxTrust,r->weight);
+			if (r->to != destination)
 			{
-				traversedNodes.add(from);
-				Relation r = from.getRelation(destination);
-				Double w = r.weight;
-				traversedRelations.add(r);
-				indent(log_sim, from + " -> " + destination + "(" + w + ") + ");
-				result = "(" + w + ")";
-				return w;
-			}
-		case PATHS:
-		case TERMINAL_PATHS:
-			if (from == destination)
-			{
-				return 1.0;
-			}
-			double ret = 0.0;
-			double weightSum = 0.0;
-			Enumeration<Relation> i = from.outRelations.elements();
-			double maxTrust=0;
-			while (i.hasMoreElements())
-			{
-				Relation r = i.nextElement();
-				if (r.to.flag)
-					continue;
-				indent(log_sim, "" + r + "(" + r.weight + ")*rel(" + r.to + " -> " + destination + ") ");
-				maxTrust=Math.max(maxTrust,r.weight);
-				if (r.to != destination)
-				{
-					double ricorsiva = Math.min(trustRic(r.to, destination),maxTrust);
+				double ricorsiva = min(trustRic(r->to, destination), maxTrust);
 
-					weightSum += ricorsiva > 0.0 ? Math.pow(hopsValue, -1) * r.weight : 0.0;
-					ret += (Math.pow(hopsValue, -1) * r.weight * ricorsiva);
-					if (ricorsiva > 0.0)
-						traversedRelations.add(r);
+				weightSum += ricorsiva > 0.0 ? pow(hopsValue, -1) * r->weight : 0.0;
+				ret += (pow(hopsValue, -1) * r->weight * ricorsiva);
+				if (ricorsiva > 0.0)
+					traversedRelations.append(r);
 
-				}
-				else
-				{
-					traversedRelations.add(r);
-					weightSum += 1.0;
-					ret += r.weight;
-				}
-			}
-			if (ret > 0.0)
-				traversedNodes.add(from);
-
-			if (weightSum > 0.0)
-			{
-
-				result = "(" + ret + ")/" + weightSum + "[=" + ret / weightSum + "] ";
-				return ret / weightSum;
 			}
 			else
 			{
-				result = "[=" + ret + "] ";
-				return ret;
+				traversedRelations.append(r);
+				weightSum += 1.0;
+				ret += r->weight;
 			}
 		}
-		return 0.0;
-	} finally
-	{
-		from.flag = false;
-		indentationLevel--;
-		indent(log_sim, "}" + result + "+");
+		if (ret > 0.0)
+			traversedNodes.append(from);
 
+		if (weightSum > 0.0)
+		{
+			result = QString() + "(" + ret + ")/" + weightSum + "[=" + ret / weightSum + "] ";
+			retVal = ret / weightSum;
+		}
+		else
+		{
+			result = QString() + "[=" + ret + "] ";
+			retVal = ret;
+		}
+		break;
 	}
-
+	retVal = 0.0;
+	from->flag = false;
+	indentationLevel--;
+	indent(logSim, QString() + "}" + result + "+");
+	return retVal;
 }
 
 double Relnet::trust(QString from, QString destination)
-throw Exception
 {
-	net.reset();
+	net->reset();
+	for(QVector<Node*>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
+	{
+		delete *it;
+	}
 	traversedNodes.clear();
+	for(QVector<Relation*>::iterator it = traversedRelations.begin(); it != traversedRelations.end(); ++it)
+	{
+		delete *it;
+	}	
 	traversedRelations.clear();
-	double ret = trustRic(net.getNode(from), net.getNode(destination));
-	traversedNodes.add(net.getNode(destination));
-	Net n2 = net.getNode(from).cloneNet(name + "_" + from + "_trust", traversedNodes, traversedRelations);
-	n2.sort(from, destination);
-	n2.saveNet();
+	double ret = trustRic(net->getNode(from), net->getNode(destination));
+	traversedNodes.append(net->getNode(destination));
+	Net* n2 = net->getNode(from)->cloneNet(name + "_" + from + "_trust", traversedNodes, traversedRelations);
+	n2->sort(from, destination);
+	n2->saveNet();
 
 	return ret;
 }
 
 double Relnet::trust(QString path)
-throw Exception
 {
-	return trust("" + path.charAt(0), "" + path.charAt(1));
+	return trust(path.at(0), path.at(1));
 }
 
-private void Relnet::indent(StringBuffer dest, QString s)
+void Relnet::indent(QString dest, QString s)
 {
 	for (int i = 0; i < indentationLevel; i++)
 		dest.append("\t");
@@ -197,45 +204,42 @@ private void Relnet::indent(StringBuffer dest, QString s)
 	dest.append('\n');
 }
 
-static void Relnet::printLog()
+void printLog()
 {
-	System.out.println(log_sim);
-	System.out.println();
-	System.out.println(log_status);
-
+	qDebug() << logSim;
+	qDebug() << logStatus;
 }
 
 void Relnet::saveNet()
 {
-	net.saveNet();
+	net->saveNet();
 }
 
 void Relnet::addRelation(QString r, double d)
 {
-	net.addNode("" + r.charAt(0));
-	net.addNode("" + r.charAt(1));
+	net->addNode(r.at(0));
+	net->addNode(r.at(1));
 	try
 	{
-		net.addRelation("" + r.charAt(0), "" + r.charAt(1), d);
+		net->addRelation(r.at(0), r.at(1), d);
 	} 
 	catch (NodeNotExistingException &e)
 	{
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		qDebug() << "NodeNotExistingException";
 	}
 }
 
 void Relnet::addRelation(QString from, QString to, double d)
 {
-	net.addNode(from);
-	net.addNode(to);
+	net->addNode(from);
+	net->addNode(to);
 	try
 	{
-		net.addRelation(from, "" + to, d);
-	} catch (NodeNotExistingException e)
+		net->addRelation(from, to, d);
+	} 
+	catch (NodeNotExistingException e)
 	{
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		qDebug() << "NodeNotExistingException";
 	}
 }
 

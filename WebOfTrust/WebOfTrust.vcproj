@@ -191,6 +191,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\utils.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\weboftrust.cpp"
 				>
 			</File>
@@ -355,13 +359,6 @@
 					RelativePath=".\GeneratedFiles\Release\moc_weboftrust.cpp"
 					>
 					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
 						Name="Debug|Win32"
 						ExcludedFromBuild="true"
 						>
@@ -382,13 +379,6 @@
 					<FileConfiguration
 						Name="Release|Win32"
 						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|Win32"
 						>
 						<Tool
 							Name="VCCLCompilerTool"

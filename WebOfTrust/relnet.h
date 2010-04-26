@@ -2,7 +2,7 @@
 #define RELNET_H
 
 #include <QString>
-#include <vector>
+#include <QVector>
 #include "exception.h"
 #include "utils.h"
 
@@ -18,12 +18,13 @@ class Relnet
 {
 
 public:
-	vector<Node*> traversedNodes;
-	vector<Relation*> traversedRelations;
-	Net* net;
-	Net* getNet();
 	Relnet();
 	Relnet(QString name);
+	~Relnet();
+	QVector<Node*> traversedNodes;
+	QVector<Relation*> traversedRelations;
+	Net* net;
+	Net* getNet();
 	NodeStatus getStatus(Node* from, Node* destination);
 	NodeStatus getStatus(QString path); // throw NodeNotExistingException;
 	double trustRic(Node* from, Node* destination); // throw RelationNotExistingException,
@@ -33,7 +34,6 @@ public:
 	double trust(QString path);
 		//throw Exception;
 	void indent(QString dest, QString s);
-	void printLog();
 	void saveNet();
 		//throw Exception;
 	void addRelation(QString r, double d);
@@ -42,6 +42,8 @@ public:
 private:
 	int indentationLevel;
 	QString name;
-}
+};
+
+void printLog();
 
 #endif // RELNET_H

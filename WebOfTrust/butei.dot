@@ -1,0 +1,7 @@
+digraph net {
+rankdir=LR;
+node [shape=circle];
+roby -> ciro [ label = 0.6 ];
+ciro -> tosi [ label = 0.75 ];
+roby -> tosi [ label = 0.2 ];
+}
