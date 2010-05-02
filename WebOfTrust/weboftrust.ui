@@ -13,7 +13,13 @@
   <property name="windowTitle">
    <string>WebOfTrust</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QGraphicsView" name="netImg"/>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -37,6 +43,13 @@
     </property>
     <addaction name="action_Calcola_Fiducia"/>
    </widget>
+   <widget class="QMenu" name="menu_Utente">
+    <property name="title">
+     <string>&amp;Utente</string>
+    </property>
+    <addaction name="action_Login"/>
+   </widget>
+   <addaction name="menu_Utente"/>
    <addaction name="menu_Certificati"/>
    <addaction name="menu_Fiducia"/>
   </widget>
@@ -72,6 +85,11 @@
   <action name="actionE_sporta">
    <property name="text">
     <string>E&amp;sporta</string>
+   </property>
+  </action>
+  <action name="action_Login">
+   <property name="text">
+    <string>&amp;Login</string>
    </property>
   </action>
  </widget>

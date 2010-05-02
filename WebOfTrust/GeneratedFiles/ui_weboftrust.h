@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'weboftrust.ui'
 **
-** Created: Tue 27. Apr 00:52:14 2010
+** Created: Mon 3. May 00:36:38 2010
 **      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -14,6 +14,8 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QGraphicsView>
+#include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
@@ -32,10 +34,14 @@ public:
     QAction *action_Emetti;
     QAction *actionImpo_rta;
     QAction *actionE_sporta;
+    QAction *action_Login;
     QWidget *centralWidget;
+    QHBoxLayout *horizontalLayout;
+    QGraphicsView *netImg;
     QMenuBar *menuBar;
     QMenu *menu_Certificati;
     QMenu *menu_Fiducia;
+    QMenu *menu_Utente;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -54,8 +60,19 @@ public:
         actionImpo_rta->setObjectName(QString::fromUtf8("actionImpo_rta"));
         actionE_sporta = new QAction(WebOfTrustClass);
         actionE_sporta->setObjectName(QString::fromUtf8("actionE_sporta"));
+        action_Login = new QAction(WebOfTrustClass);
+        action_Login->setObjectName(QString::fromUtf8("action_Login"));
         centralWidget = new QWidget(WebOfTrustClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setMargin(11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        netImg = new QGraphicsView(centralWidget);
+        netImg->setObjectName(QString::fromUtf8("netImg"));
+
+        horizontalLayout->addWidget(netImg);
+
         WebOfTrustClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WebOfTrustClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -64,6 +81,8 @@ public:
         menu_Certificati->setObjectName(QString::fromUtf8("menu_Certificati"));
         menu_Fiducia = new QMenu(menuBar);
         menu_Fiducia->setObjectName(QString::fromUtf8("menu_Fiducia"));
+        menu_Utente = new QMenu(menuBar);
+        menu_Utente->setObjectName(QString::fromUtf8("menu_Utente"));
         WebOfTrustClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(WebOfTrustClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -72,12 +91,14 @@ public:
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         WebOfTrustClass->setStatusBar(statusBar);
 
+        menuBar->addAction(menu_Utente->menuAction());
         menuBar->addAction(menu_Certificati->menuAction());
         menuBar->addAction(menu_Fiducia->menuAction());
         menu_Certificati->addAction(action_Emetti);
         menu_Certificati->addAction(actionImpo_rta);
         menu_Certificati->addAction(actionE_sporta);
         menu_Fiducia->addAction(action_Calcola_Fiducia);
+        menu_Utente->addAction(action_Login);
 
         retranslateUi(WebOfTrustClass);
 
@@ -92,8 +113,10 @@ public:
         action_Emetti->setText(QApplication::translate("WebOfTrustClass", "&Emetti", 0, QApplication::UnicodeUTF8));
         actionImpo_rta->setText(QApplication::translate("WebOfTrustClass", "&Importa", 0, QApplication::UnicodeUTF8));
         actionE_sporta->setText(QApplication::translate("WebOfTrustClass", "E&sporta", 0, QApplication::UnicodeUTF8));
+        action_Login->setText(QApplication::translate("WebOfTrustClass", "&Login", 0, QApplication::UnicodeUTF8));
         menu_Certificati->setTitle(QApplication::translate("WebOfTrustClass", "&Certificati", 0, QApplication::UnicodeUTF8));
         menu_Fiducia->setTitle(QApplication::translate("WebOfTrustClass", "&Fiducia", 0, QApplication::UnicodeUTF8));
+        menu_Utente->setTitle(QApplication::translate("WebOfTrustClass", "&Utente", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

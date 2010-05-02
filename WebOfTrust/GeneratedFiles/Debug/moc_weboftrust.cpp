@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'weboftrust.h'
 **
-** Created: Tue 27. Apr 00:52:14 2010
+** Created: Mon 3. May 00:36:38 2010
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.3)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,16 +23,20 @@ static const uint qt_meta_data_WebOfTrust[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       2,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
+
+ // slots: signature, parameters, type, tag, flags
+      12,   11,   11,   11, 0x08,
+      20,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_WebOfTrust[] = {
-    "WebOfTrust\0"
+    "WebOfTrust\0\0login()\0emetti()\0"
 };
 
 const QMetaObject WebOfTrust::staticMetaObject = {
@@ -58,6 +62,14 @@ int WebOfTrust::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: login(); break;
+        case 1: emetti(); break;
+        default: ;
+        }
+        _id -= 2;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE
