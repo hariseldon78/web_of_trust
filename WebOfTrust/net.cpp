@@ -84,11 +84,37 @@ void Net::saveNet() // TODO installare dot
 	args.append(name + ".dot");
 	QString path = "C:\\Program Files\\Graphviz2.26.3\\bin\\dot.exe";
 	QProcess::execute(path, args);
-//	QProcess::waitForFinished(4000);
-	//Runtime.getRuntime().exec("eog " + name + ".dot.png");
 }
 
+void Net::loadNet(QString fileName)
+{
+	if (fileName.isEmpty())
+	{
+		fileName = name + ".dot";
+	}
+	QString fileData = readFromFile(fileName);
+	QTextStream in(&fileData);
+	QString line;
+	while (!in.atEnd()) 
+	{
+		line = in.readLine();
+		if (line.contains("->"))
+		{
+			QRegExp re("(.+) -> (.+) \\[ label = (0[.]\\d+) \\]");
+			int pos = re.indexIn(line);
+			if (pos > -1)
+			{
+				QString from = re.cap(1);
+				QString to = re.cap(2);
+				QString value = re.cap(3);
+				addNode(from);
+				addNode(to);
+				addRelation(from, to, value.toDouble());
+			}
+		}
+	}
 
+}
 
 void Net::sort(QString from, QString destination)
 {

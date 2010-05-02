@@ -2,4 +2,6 @@ digraph net {
 rankdir=LR;
 node [shape=circle];
 l -> r [ label = 0.9 ];
+l -> r [ label = 0.6 ];
+l -> k [ label = 0.5 ];
 }

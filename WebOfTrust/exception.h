@@ -9,5 +9,6 @@ class RelationNotExistingException: public Exception {};
 class SelfRelationCalledException: public Exception {};
 class NodeNotExistingException: public Exception {};
 class NodeNotFoundInSubnetException: public Exception {};
+class FileErrorException: public Exception {};
 
 #endif // EXCEPTION_H

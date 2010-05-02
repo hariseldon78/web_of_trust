@@ -31,6 +31,8 @@ void WebOfTrust::login()
 		ui.menu_Fiducia->setDisabled(false);
 		loginA->setDisabled(true);
 		rn = new Relnet(user);
+		rn->getNet()->loadNet();
+		refresh();
 	}
 }
 

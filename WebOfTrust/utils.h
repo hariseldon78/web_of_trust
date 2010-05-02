@@ -9,5 +9,6 @@ typedef enum NodeStatus
 };
 
 bool writeToFile(QString fileName, QString what);
+QString readFromFile(QString fileName);
 
 #endif // UTILS_H
