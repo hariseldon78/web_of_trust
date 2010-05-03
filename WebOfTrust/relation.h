@@ -7,12 +7,13 @@ class Node;
 
 class Relation
 {
-	public:
-		Node* from;
-		Node* to;
-		double weight;
-		Relation(Node* from, Node* to, double d);
-        QString toString();
+public:
+	Node* from;
+	Node* to;
+	double weight;
+	Relation(Node* from, Node* to, double d);
+	QString toString();
 };
+
 
 #endif // RELATION_H

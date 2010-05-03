@@ -28,14 +28,14 @@ public:
 	NodeStatus getStatus(Node* from, Node* destination);
 	NodeStatus getStatus(QString path); // throw NodeNotExistingException;
 	double trustRic(Node* from, Node* destination); // throw RelationNotExistingException,
-		// SelfRelationCalledException;
+	// SelfRelationCalledException;
 	double trust(QString from, QString destination);
-		//throw Exception;
+	//throw Exception;
 	double trust(QString path);
-		//throw Exception;
+	//throw Exception;
 	void indent(QString dest, QString s);
 	void saveNet();
-		//throw Exception;
+	//throw Exception;
 	void addRelation(QString r, double d);
 	void addRelation(QString from, QString to, double d);
 

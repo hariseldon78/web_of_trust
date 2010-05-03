@@ -26,5 +26,5 @@ QString readFromFile(QString fileName)
 	QTextStream in(&file);
 	QString ret = in.readAll();
 	file.close();
-	return ret;	
+	return ret;
 }

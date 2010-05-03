@@ -2,18 +2,18 @@
 #include "node.h"
 #include "relation.h"
 #include "net.h"
-#include <math.h>
 #include <QDebug>
-#include <windows.h>
 
 QString logStatus, logSim;
 
-Relnet::Relnet(): indentationLevel(0)
+Relnet::Relnet() :
+	indentationLevel(0)
 {
 
 }
 
-Relnet::Relnet(QString _name): name(_name)
+Relnet::Relnet(QString _name) :
+	name(_name)
 {
 	net = new Net(_name);
 }
@@ -102,16 +102,16 @@ double Relnet::trustRic(Node* from, Node* destination)
 		// result="(1)";
 		// return 1;
 	case TERMINAL:
-		{
-			traversedNodes.append(from);
-			Relation* r = from->getRelation(destination);
-			double w = r->weight;
-			traversedRelations.append(r);
-			indent(logSim, from->toString() + " -> " + destination->toString() + "(" + QString::number(w) + ") + ");
-			result = QString("(") + QString::number(w) + ")";
-			retVal = w;
-			break;
-		}
+	{
+		traversedNodes.append(from);
+		Relation* r = from->getRelation(destination);
+		double w = r->weight;
+		traversedRelations.append(r);
+		indent(logSim, from->toString() + " -> " + destination->toString() + "(" + QString::number(w) + ") + ");
+		result = QString("(") + QString::number(w) + ")";
+		retVal = w;
+		break;
+	}
 	case PATHS:
 	case TERMINAL_PATHS:
 		if (from == destination)
@@ -122,14 +122,15 @@ double Relnet::trustRic(Node* from, Node* destination)
 		double ret = 0.0;
 		double weightSum = 0.0;
 		QVectorIterator<Relation*> i(from->outRelations);
-		double maxTrust=0;
+		double maxTrust = 0;
 		while (i.hasNext())
 		{
 			Relation* r = i.next();
 			if (r->to->flag)
 				continue;
-			indent(logSim, QString() + "" + r->toString() + "(" + QString::number(r->weight) + ")*rel(" + r->to->toString() + " -> " + destination->toString() + ") ");
-			maxTrust = max(maxTrust,r->weight);
+			indent(logSim, QString() + "" + r->toString() + "(" + QString::number(r->weight) + ")*rel("
+					+ r->to->toString() + " -> " + destination->toString() + ") ");
+			maxTrust = max(maxTrust, r->weight);
 			if (r->to != destination)
 			{
 				double ricorsiva = min(trustRic(r->to, destination), maxTrust);
@@ -172,15 +173,15 @@ double Relnet::trustRic(Node* from, Node* destination)
 double Relnet::trust(QString from, QString destination)
 {
 	net->reset();
-	for(QVector<Node*>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
+	for (QVector<Node*>::iterator it = traversedNodes.begin(); it != traversedNodes.end(); ++it)
 	{
 		delete *it;
 	}
 	traversedNodes.clear();
-	for(QVector<Relation*>::iterator it = traversedRelations.begin(); it != traversedRelations.end(); ++it)
+	for (QVector<Relation*>::iterator it = traversedRelations.begin(); it != traversedRelations.end(); ++it)
 	{
 		delete *it;
-	}	
+	}
 	traversedRelations.clear();
 	double ret = trustRic(net->getNode(from), net->getNode(destination));
 	traversedNodes.append(net->getNode(destination));
@@ -222,8 +223,7 @@ void Relnet::addRelation(QString r, double d)
 	try
 	{
 		net->addRelation(r.at(0), r.at(1), d);
-	} 
-	catch (NodeNotExistingException &e)
+	} catch (NodeNotExistingException &e)
 	{
 		qDebug() << "NodeNotExistingException";
 	}
@@ -236,8 +236,7 @@ void Relnet::addRelation(QString from, QString to, double d)
 	try
 	{
 		net->addRelation(from, to, d);
-	} 
-	catch (NodeNotExistingException e)
+	} catch (NodeNotExistingException e)
 	{
 		qDebug() << "NodeNotExistingException";
 	}

@@ -3,7 +3,6 @@
 
 #include <QString>
 #include <QVector>
-#include <QString>
 
 class Node;
 class Relation;
@@ -24,7 +23,6 @@ public:
 	void sort(QString from, QString destination);
 private:
 	QString name;
-	
-};
 
+};
 #endif // NET_H

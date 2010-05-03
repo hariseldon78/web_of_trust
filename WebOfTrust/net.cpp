@@ -8,31 +8,27 @@
 #include <QDir>
 #include <QStringList>
 
-Net::Net(QString _name): name(_name)
+Net::Net(QString _name) :
+	name(_name)
 {
 
 }
-
-
 
 void Net::addNode(QString nodeName)
 {
 	try
 	{
 		getNode(nodeName);
-	}
-	catch(NodeNotExistingException &e)
+	} catch (NodeNotExistingException &e)
 	{
 		qDebug() << QString("aggiungo il nodo %1 alla rete %2").arg(nodeName).arg(name);
 		nodes.append(new Node(this, nodeName));
 	}
 }
 
-
-
 Node* Net::getNode(QString _name)
 {
-	for(int i = 0; i < nodes.size(); i++)
+	for (int i = 0; i < nodes.size(); i++)
 		if (nodes.at(i)->name.compare(_name) == 0)
 			return nodes.at(i);
 
@@ -47,7 +43,7 @@ void Net::addRelation(QString from, QString to, double d)
 }
 
 QString Net::toString()
-{	
+{
 	QString buf;
 	buf.append("digraph net {\n");
 	buf.append("rankdir=LR;\n");
@@ -68,12 +64,9 @@ QString Net::toString()
 
 void Net::reset()
 {
-	for (int i=0;i<nodes.size();i++)
+	for (int i = 0; i < nodes.size(); i++)
 		nodes.at(i)->flag = false;
 }
-
-
-
 
 void Net::saveNet() // TODO installare dot
 {
@@ -82,7 +75,7 @@ void Net::saveNet() // TODO installare dot
 	args.append("-O");
 	args.append("-Tpng");
 	args.append(name + ".dot");
-	QString path = "C:\\Program Files\\Graphviz2.26.3\\bin\\dot.exe";
+	QString path = "/usr/bin/dot";//"C:\\Program Files\\Graphviz2.26.3\\bin\\dot.exe";
 	QProcess::execute(path, args);
 }
 
@@ -95,7 +88,7 @@ void Net::loadNet(QString fileName)
 	QString fileData = readFromFile(fileName);
 	QTextStream in(&fileData);
 	QString line;
-	while (!in.atEnd()) 
+	while (!in.atEnd())
 	{
 		line = in.readLine();
 		if (line.contains("->"))
@@ -118,8 +111,8 @@ void Net::loadNet(QString fileName)
 
 void Net::sort(QString from, QString destination)
 {
-	int posFrom=0;
-	for (int i=0;i<relations.size();i++)
+	int posFrom = 0;
+	for (int i = 0; i < relations.size(); i++)
 	{
 		if (relations.at(i)->from->name.compare(from) == 0)
 		{
@@ -131,7 +124,7 @@ void Net::sort(QString from, QString destination)
 	}
 
 	int posTo = relations.size() - 1;
-	for (int i=posFrom;i<relations.size();i++)
+	for (int i = posFrom; i < relations.size(); i++)
 	{
 		if (relations.at(i)->to->name.compare(destination) == 0)
 		{
