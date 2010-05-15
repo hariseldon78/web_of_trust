@@ -7,4 +7,5 @@ l -> k [ label = 0.5 ];
 l -> p [ label = 0.7 ];
 l -> abc [ label = 0.5 ];
 l -> def [ label = 0.1 ];
+l -> s [ label = 0.7 ];
 }

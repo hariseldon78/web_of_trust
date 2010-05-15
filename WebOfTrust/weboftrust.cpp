@@ -1,6 +1,7 @@
 #include "weboftrust.h"
 #include "relnet.h"
 #include "net.h"
+#include "exception.h"
 #include <QInputDialog>
 
 WebOfTrust::WebOfTrust(QWidget *parent, Qt::WFlags flags): QMainWindow(parent, flags), logged(false)
@@ -31,7 +32,10 @@ void WebOfTrust::login()
 		ui.menu_Fiducia->setDisabled(false);
 		loginA->setDisabled(true);
 		rn = new Relnet(user);
-		rn->getNet()->loadNet();
+		try{
+			rn->getNet()->loadNet();
+		} catch(FileErrorException& e)
+		{};
 		refresh();
 	}
 }
