@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'weboftrust.ui'
 **
-** Created: Sat May 15 23:01:21 2010
+** Created: Sun May 16 01:31:16 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,15 +35,17 @@ public:
     QAction *actionImpo_rta;
     QAction *actionE_sporta;
     QAction *action_Login;
+    QAction *action_Impostazioni;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout;
     QGraphicsView *netImg;
+    QToolBar *mainToolBar;
+    QStatusBar *statusBar;
     QMenuBar *menuBar;
     QMenu *menu_Certificati;
     QMenu *menu_Fiducia;
     QMenu *menu_Utente;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
+    QMenu *menu_Strumenti;
 
     void setupUi(QMainWindow *WebOfTrustClass)
     {
@@ -62,6 +64,8 @@ public:
         actionE_sporta->setObjectName(QString::fromUtf8("actionE_sporta"));
         action_Login = new QAction(WebOfTrustClass);
         action_Login->setObjectName(QString::fromUtf8("action_Login"));
+        action_Impostazioni = new QAction(WebOfTrustClass);
+        action_Impostazioni->setObjectName(QString::fromUtf8("action_Impostazioni"));
         centralWidget = new QWidget(WebOfTrustClass);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
@@ -74,31 +78,35 @@ public:
         horizontalLayout->addWidget(netImg);
 
         WebOfTrustClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(WebOfTrustClass);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 600, 22));
-        menu_Certificati = new QMenu(menuBar);
-        menu_Certificati->setObjectName(QString::fromUtf8("menu_Certificati"));
-        menu_Fiducia = new QMenu(menuBar);
-        menu_Fiducia->setObjectName(QString::fromUtf8("menu_Fiducia"));
-        menu_Utente = new QMenu(menuBar);
-        menu_Utente->setObjectName(QString::fromUtf8("menu_Utente"));
-        WebOfTrustClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(WebOfTrustClass);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
         WebOfTrustClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(WebOfTrustClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         WebOfTrustClass->setStatusBar(statusBar);
+        menuBar = new QMenuBar(WebOfTrustClass);
+        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 600, 27));
+        menu_Certificati = new QMenu(menuBar);
+        menu_Certificati->setObjectName(QString::fromUtf8("menu_Certificati"));
+        menu_Fiducia = new QMenu(menuBar);
+        menu_Fiducia->setObjectName(QString::fromUtf8("menu_Fiducia"));
+        menu_Utente = new QMenu(menuBar);
+        menu_Utente->setObjectName(QString::fromUtf8("menu_Utente"));
+        menu_Strumenti = new QMenu(menuBar);
+        menu_Strumenti->setObjectName(QString::fromUtf8("menu_Strumenti"));
+        WebOfTrustClass->setMenuBar(menuBar);
 
         menuBar->addAction(menu_Utente->menuAction());
         menuBar->addAction(menu_Certificati->menuAction());
         menuBar->addAction(menu_Fiducia->menuAction());
+        menuBar->addAction(menu_Strumenti->menuAction());
         menu_Certificati->addAction(action_Emetti);
         menu_Certificati->addAction(actionImpo_rta);
         menu_Certificati->addAction(actionE_sporta);
         menu_Fiducia->addAction(action_Calcola_Fiducia);
         menu_Utente->addAction(action_Login);
+        menu_Strumenti->addAction(action_Impostazioni);
 
         retranslateUi(WebOfTrustClass);
 
@@ -114,9 +122,11 @@ public:
         actionImpo_rta->setText(QApplication::translate("WebOfTrustClass", "&Importa", 0, QApplication::UnicodeUTF8));
         actionE_sporta->setText(QApplication::translate("WebOfTrustClass", "E&sporta", 0, QApplication::UnicodeUTF8));
         action_Login->setText(QApplication::translate("WebOfTrustClass", "&Login", 0, QApplication::UnicodeUTF8));
+        action_Impostazioni->setText(QApplication::translate("WebOfTrustClass", "&Impostazioni", 0, QApplication::UnicodeUTF8));
         menu_Certificati->setTitle(QApplication::translate("WebOfTrustClass", "&Certificati", 0, QApplication::UnicodeUTF8));
         menu_Fiducia->setTitle(QApplication::translate("WebOfTrustClass", "&Fiducia", 0, QApplication::UnicodeUTF8));
         menu_Utente->setTitle(QApplication::translate("WebOfTrustClass", "&Utente", 0, QApplication::UnicodeUTF8));
+        menu_Strumenti->setTitle(QApplication::translate("WebOfTrustClass", "&Strumenti", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

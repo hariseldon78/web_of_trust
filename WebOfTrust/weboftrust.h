@@ -33,6 +33,7 @@ private:
 private slots:
 	void login();
 	void emetti();
+	void impostazioni();
 };
 
 #endif // WEBOFTRUST_H

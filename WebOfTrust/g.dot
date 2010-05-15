@@ -1,0 +1,5 @@
+digraph net {
+rankdir=LR;
+node [shape=circle];
+g -> r [ label = 0.5 ];
+}

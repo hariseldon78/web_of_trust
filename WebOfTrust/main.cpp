@@ -5,8 +5,11 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    WebOfTrust w;
-    w.show();
-    return a.exec();
+	QCoreApplication::setOrganizationName("TrustSoftware");
+	QCoreApplication::setOrganizationDomain("wot.org");
+	QCoreApplication::setApplicationName("WebOfTrust");
+	QApplication a(argc, argv);
+	WebOfTrust w;
+	w.show();
+	return a.exec();
 }

@@ -80,7 +80,8 @@ void Net::refreshImage()
 	args.append("-O");
 	args.append("-Tpng");
 	args.append(name + ".dot");
-	QString path = "/usr/bin/dot";//"C:\\Program Files\\Graphviz2.26.3\\bin\\dot.exe";
+	QSettings s;
+	QString path = s.value("dot_path").toString();
 	QProcess::execute(path, args);
 }
 

@@ -2,6 +2,7 @@
 #include "relnet.h"
 #include "net.h"
 #include "exception.h"
+#include "settings.h"
 #include <QInputDialog>
 
 WebOfTrust::WebOfTrust(QWidget *parent, Qt::WFlags flags): QMainWindow(parent, flags), logged(false)
@@ -11,6 +12,7 @@ WebOfTrust::WebOfTrust(QWidget *parent, Qt::WFlags flags): QMainWindow(parent, f
 	loginA = ui.action_Login;
 	connect(loginA, SIGNAL(triggered()), this, SLOT(login()));
 	connect(ui.action_Emetti, SIGNAL(triggered()), this, SLOT(emetti()));
+	connect(ui.action_Impostazioni, SIGNAL(triggered()), this, SLOT(impostazioni()));
 	ui.menu_Certificati->setDisabled(true);
 	ui.menu_Fiducia->setDisabled(true);
 }
@@ -73,4 +75,10 @@ void WebOfTrust::refresh()
 	QPixmap pix(user + ".dot.png");
 	scene->addPixmap(pix);
 	ui.netImg->show();
+}
+
+void WebOfTrust::impostazioni()
+{
+	Settings s;
+	s.exec();
 }
