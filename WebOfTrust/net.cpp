@@ -68,9 +68,14 @@ void Net::reset()
 		nodes.at(i)->flag = false;
 }
 
-void Net::saveNet() // TODO installare dot
+void Net::saveNet()
 {
 	writeToFile(name + ".dot", toString());
+	refreshImage();
+}
+
+void Net::refreshImage()
+{
 	QStringList args;
 	args.append("-O");
 	args.append("-Tpng");
@@ -93,7 +98,7 @@ void Net::loadNet(QString fileName)
 		line = in.readLine();
 		if (line.contains("->"))
 		{
-			QRegExp re("(.+) -> (.+) \\[ label = (0[.]\\d+) \\]");
+			QRegExp re("(.+) -> (.+) \\[ label = (0[.]\\d+|1|0) \\]");
 			int pos = re.indexIn(line);
 			if (pos > -1)
 			{

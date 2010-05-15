@@ -20,6 +20,7 @@ public:
 	void reset();
 	void saveNet();
 	void loadNet(QString fileName = "");
+	void refreshImage();
 	void sort(QString from, QString destination);
 private:
 	QString name;

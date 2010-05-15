@@ -1,8 +1,8 @@
 digraph net {
 rankdir=LR;
 node [shape=circle];
-l -> r [ label = 0.9 ];
-l -> r [ label = 0.6 ];
+l -> r [ label = 1 ];
+l -> r [ label = 0 ];
 l -> k [ label = 0.5 ];
 l -> p [ label = 0.7 ];
 l -> abc [ label = 0.5 ];

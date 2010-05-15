@@ -36,6 +36,7 @@ void WebOfTrust::login()
 			rn->getNet()->loadNet();
 		} catch(FileErrorException& e)
 		{};
+		rn->getNet()->refreshImage();
 		refresh();
 	}
 }
