@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading UI file 'settings.ui'
+** Form generated from reading ui file 'settings.ui'
 **
-** Created: Sun May 16 01:31:16 2010
-**      by: Qt User Interface Compiler version 4.6.2
+** Created: Mon 31. May 22:20:04 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
-** WARNING! All changes made in this file will be lost when recompiling UI file!
+** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
 
 #ifndef UI_SETTINGS_H
@@ -65,7 +65,7 @@ public:
         formLayoutWidget_2->setGeometry(QRect(10, 10, 571, 331));
         formLayout_2 = new QFormLayout(formLayoutWidget_2);
         formLayout_2->setSpacing(6);
-        formLayout_2->setContentsMargins(11, 11, 11, 11);
+        formLayout_2->setMargin(11);
         formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
         formLayout_2->setContentsMargins(0, 0, 0, 0);
         nomeUtenteLabel = new QLabel(formLayoutWidget_2);
@@ -106,7 +106,7 @@ public:
         formLayoutWidget->setGeometry(QRect(10, 10, 571, 331));
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setSpacing(6);
-        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setMargin(11);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
         formLayout->setContentsMargins(0, 0, 0, 0);
         dotPathLabel = new QLabel(formLayoutWidget);
@@ -138,6 +138,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(personali), QApplication::translate("SettingsClass", "&Personali", 0, QApplication::UnicodeUTF8));
         dotPathLabel->setText(QApplication::translate("SettingsClass", "dot path", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(sistema), QApplication::translate("SettingsClass", "&Sistema", 0, QApplication::UnicodeUTF8));
+        Q_UNUSED(SettingsClass);
     } // retranslateUi
 
 };

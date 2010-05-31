@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading UI file 'weboftrust.ui'
+** Form generated from reading ui file 'weboftrust.ui'
 **
-** Created: Sun May 16 01:31:16 2010
-**      by: Qt User Interface Compiler version 4.6.2
+** Created: Mon 31. May 22:20:04 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
-** WARNING! All changes made in this file will be lost when recompiling UI file!
+** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
 
 #ifndef UI_WEBOFTRUST_H
@@ -70,7 +70,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         horizontalLayout = new QHBoxLayout(centralWidget);
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setMargin(11);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         netImg = new QGraphicsView(centralWidget);
         netImg->setObjectName(QString::fromUtf8("netImg"));

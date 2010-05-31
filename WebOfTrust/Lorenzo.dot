@@ -2,4 +2,6 @@ digraph net {
 rankdir=LR;
 node [shape=circle];
 Lorenzo -> roby [ label = 0.7 ];
+Lorenzo -> Ivan [ label = 0.65 ];
+Lorenzo -> Dvd [ label = 0.5 ];
 }
