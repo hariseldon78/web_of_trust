@@ -22,6 +22,7 @@ public:
 	void loadNet(QString fileName = "");
 	void refreshImage();
 	void sort(QString from, QString destination);
+	void importCertFile(QString fileName);
 private:
 	QString name;
 

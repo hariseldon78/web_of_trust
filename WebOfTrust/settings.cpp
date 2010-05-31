@@ -13,7 +13,7 @@ Settings::Settings(QWidget *parent)
 	ui.emailLineEdit->setText(s.value("email").toString());
 	ui.chiaveGpgLineEdit->setText(s.value("chiave_gpg").toString());
 	ui.dotPathLineEdit->setText(s.value("dot_path").toString());
-
+	ui.certificatesFolderLineEdit->setText(s.value("certificates_folder").toString());
 }
 
 Settings::~Settings()
@@ -28,5 +28,6 @@ void Settings::accept()
 	s.setValue("email",ui.emailLineEdit->text());
 	s.setValue("chiave_gpg",ui.chiaveGpgLineEdit->text());
 	s.setValue("dot_path",ui.dotPathLineEdit->text());
+	s.setValue("certificates_folder",ui.certificatesFolderLineEdit->text());
 	QDialog::accept();
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'weboftrust.ui'
 **
-** Created: Mon 31. May 22:20:04 2010
+** Created: Tue 1. Jun 00:46:17 2010
 **      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!

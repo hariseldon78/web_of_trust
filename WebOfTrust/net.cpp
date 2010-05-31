@@ -7,9 +7,11 @@
 #include <QtCore>
 #include <QDir>
 #include <QStringList>
+#include <QDomDocument>
+#include <QDomElement>
 
 Net::Net(QString _name) :
-	name(_name)
+name(_name)
 {
 
 }
@@ -87,32 +89,65 @@ void Net::refreshImage()
 
 void Net::loadNet(QString fileName)
 {
-	if (fileName.isEmpty())
+	//if (fileName.isEmpty())
+	//{
+	//	fileName = name + ".dot";
+	//}
+	//QString fileData = readFromFile(fileName);
+	//QTextStream in(&fileData);
+	//QString line;
+	//while (!in.atEnd())
+	//{
+	//	line = in.readLine();
+	//	if (line.contains("->"))
+	//	{
+	//		QRegExp re("(.+) -> (.+) \\[ label = (0[.]\\d+|1|0) \\]");
+	//		int pos = re.indexIn(line);
+	//		if (pos > -1)
+	//		{
+	//			QString from = re.cap(1);
+	//			QString to = re.cap(2);
+	//			QString value = re.cap(3);
+	//			addNode(from);
+	//			addNode(to);
+	//			addRelation(from, to, value.toDouble());
+	//		}
+	//	}
+	//}
+	QSettings s;
+	QDir dir  = QDir(s.value("certificates_folder").toString());	//crea una directory lang a partire dal path dove si trova il programma
+	QStringList filters;						//crea una una lista di stringhe 
+	filters << "*.xml";							//il filtro è su tutti i file con estensione .xml
+	dir.setNameFilters(filters);				//faccio in modo che dalla cartella si vedano i nomi contenuti in filters
+	QStringList files = dir.entryList();		//in "files" ci sono tutti file xml
+	foreach (QString certF, files)				//certF è una variabile temporanea che scorre in files
 	{
-		fileName = name + ".dot";
+		importCertFile(certF);
 	}
-	QString fileData = readFromFile(fileName);
-	QTextStream in(&fileData);
-	QString line;
-	while (!in.atEnd())
-	{
-		line = in.readLine();
-		if (line.contains("->"))
-		{
-			QRegExp re("(.+) -> (.+) \\[ label = (0[.]\\d+|1|0) \\]");
-			int pos = re.indexIn(line);
-			if (pos > -1)
-			{
-				QString from = re.cap(1);
-				QString to = re.cap(2);
-				QString value = re.cap(3);
-				addNode(from);
-				addNode(to);
-				addRelation(from, to, value.toDouble());
-			}
-		}
-	}
+}
 
+void Net::importCertFile(QString fileName)
+{
+	QDomDocument doc("mydocument"); 
+	QFile file(fileName);      
+	file.open(QIODevice::ReadOnly); 
+
+	if (!doc.setContent(&file)) 
+	{          
+		file.close(); 
+		return;
+	}      
+	file.close();
+	QDomElement root = doc.documentElement();
+	qDebug() << root.tagName();
+	QString from = root.elementsByTagName("from").at(0).toElement().text();
+	QString to = root.elementsByTagName("to").at(0).toElement().text();
+	QString value = root.elementsByTagName("trust").at(0).toElement().text();
+	qDebug() << from << " -> " << to;
+
+	addNode(from);
+	addNode(to);
+	addRelation(from, to, value.toDouble());
 }
 
 void Net::sort(QString from, QString destination)

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'settings.ui'
 **
-** Created: Mon 31. May 22:20:04 2010
+** Created: Tue 1. Jun 00:46:18 2010
 **      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -44,6 +44,8 @@ public:
     QFormLayout *formLayout;
     QLabel *dotPathLabel;
     QLineEdit *dotPathLineEdit;
+    QLabel *certificatesFolderLabel;
+    QLineEdit *certificatesFolderLineEdit;
 
     void setupUi(QDialog *SettingsClass)
     {
@@ -108,6 +110,7 @@ public:
         formLayout->setSpacing(6);
         formLayout->setMargin(11);
         formLayout->setObjectName(QString::fromUtf8("formLayout"));
+        formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
         formLayout->setContentsMargins(0, 0, 0, 0);
         dotPathLabel = new QLabel(formLayoutWidget);
         dotPathLabel->setObjectName(QString::fromUtf8("dotPathLabel"));
@@ -118,6 +121,16 @@ public:
         dotPathLineEdit->setObjectName(QString::fromUtf8("dotPathLineEdit"));
 
         formLayout->setWidget(0, QFormLayout::FieldRole, dotPathLineEdit);
+
+        certificatesFolderLabel = new QLabel(formLayoutWidget);
+        certificatesFolderLabel->setObjectName(QString::fromUtf8("certificatesFolderLabel"));
+
+        formLayout->setWidget(1, QFormLayout::LabelRole, certificatesFolderLabel);
+
+        certificatesFolderLineEdit = new QLineEdit(formLayoutWidget);
+        certificatesFolderLineEdit->setObjectName(QString::fromUtf8("certificatesFolderLineEdit"));
+
+        formLayout->setWidget(1, QFormLayout::FieldRole, certificatesFolderLineEdit);
 
         tabWidget->addTab(sistema, QString());
 
@@ -137,6 +150,7 @@ public:
         chiaveGpgLabel->setText(QApplication::translate("SettingsClass", "Chiave gpg", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(personali), QApplication::translate("SettingsClass", "&Personali", 0, QApplication::UnicodeUTF8));
         dotPathLabel->setText(QApplication::translate("SettingsClass", "dot path", 0, QApplication::UnicodeUTF8));
+        certificatesFolderLabel->setText(QApplication::translate("SettingsClass", "certificates folder", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(sistema), QApplication::translate("SettingsClass", "&Sistema", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(SettingsClass);
     } // retranslateUi
